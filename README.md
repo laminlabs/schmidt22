@@ -1,4 +1,4 @@
-# R&D demo: R&D demo
+# R&D demo
 
 This package is in private beta at this moment!
 
