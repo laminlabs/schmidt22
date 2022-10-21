@@ -1,13 +1,13 @@
-# Guide
-
-A step-wise pedagogic tutorial including a quickstart. The notebooks get executed in CI for testing.
-
-Ideally, each feature is explained in a separate clean notebook.
-
-This makes it both easy for the user to understand the documentation, and for the developer to increase test coverage.
+# Follow exemplary R&D operations
 
 ```{toctree}
 :maxdepth: 1
 
-quickstart
+setup
+design-experiment
+perform-experiment
+analyze-assay
+bfx
+compbio
+dataflow
 ```
