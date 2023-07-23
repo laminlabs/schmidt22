@@ -1,4 +1,4 @@
-# R&D demo
+# R&D demo: Simulation of R&D data flow
 
 This package is in private beta at this moment!
 
