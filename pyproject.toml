@@ -7,9 +7,7 @@ name = "rnd_demo"
 authors = [{name = "Lamin Labs", email = "laminlabs@gmail.com"}]
 readme = "README.md"
 dynamic = ["version", "description"]
-dependencies = [
-    "lamindb[bionty,jupyter]",
-]
+dependencies = []
 
 [project.urls]
 Home = "https://github.com/laminlabs/rnd-demo"
