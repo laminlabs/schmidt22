@@ -7,9 +7,7 @@ name = "rnd_demo"
 authors = [{name = "Lamin Labs", email = "laminlabs@gmail.com"}]
 readme = "README.md"
 dynamic = ["version", "description"]
-dependencies = [
-    "lamindb",
-]
+dependencies = []
 
 [project.urls]
 Home = "https://github.com/laminlabs/rnd-demo"
@@ -21,6 +19,7 @@ dev = [
     "nox",
     "pytest>=6.0",
     "pytest-cov",
+    "nbproject_test",
 ]
 
 [tool.black]

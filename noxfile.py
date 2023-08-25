@@ -24,6 +24,7 @@ def install(session: nox.Session):
         "install",
         "lamindb[jupyter,bionty] @ git+https://github.com/laminlabs/lamindb@release",
     )
+    session.run(*"pip install scanpy".split())
 
 
 @nox.session
