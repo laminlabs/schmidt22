@@ -8,7 +8,6 @@ authors = [{name = "Lamin Labs", email = "laminlabs@gmail.com"}]
 readme = "README.md"
 dynamic = ["version", "description"]
 dependencies = [
-    "nbproject",
     "lamindb",
 ]
 
@@ -17,10 +16,9 @@ Home = "https://github.com/laminlabs/rnd-demo"
 
 [project.optional-dependencies]
 dev = [
+    "laminci",
     "pre-commit",
     "nox",
-]
-test = [
     "pytest>=6.0",
     "pytest-cov",
 ]
@@ -31,9 +29,4 @@ preview = true
 [tool.pytest.ini_options]
 testpaths = [
     "tests",
-]
-
-[tool.coverage.run]
-omit = [
-    "rnd_demo/*",
 ]

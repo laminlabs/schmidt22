@@ -1,32 +1,27 @@
-from pathlib import Path
-
 import nox
-
-nox.options.reuse_existing_virtualenvs = True
+from laminci import upload_docs_artifact
+from laminci.nox import build_docs, login_testuser1, login_testuser2, run_pre_commit, run_pytest
+nox.options.default_venv_backend = "none"
 
 
 @nox.session
 def lint(session: nox.Session) -> None:
-    session.install("pre-commit")
-    session.run("pre-commit", "install")
-    session.run("pre-commit", "run", "--all-files")
+    run_pre_commit(session)
 
 
-@nox.session(python=["3.7", "3.8", "3.9", "3.10", "3.11"])
-def build(session):
-    session.install(".[dev,test]")
-    login_user_1 = "lndb login testuser1@lamin.ai --password cEvcwMJFX4OwbsYVaMt2Os6GxxGgDUlBGILs2RyS"  # noqa
-    login_user_2 = "lndb login testuser2@lamin.ai --password goeoNJKE61ygbz1vhaCVynGERaRrlviPBVQsjkhz"  # noqa
-    session.run(*(login_user_1.split(" ")))
-    session.run(*(login_user_2.split(" ")))
+@nox.session
+def install(session: nox.Session):
+    session.run(*"pip install .[dev]".split())
     session.run(
-        "pytest",
-        "-s",
-        "--cov=rnd_demo",
-        "--cov-append",
-        "--cov-report=term-missing",
+        "pip",
+        "install",
+        "lamindb[jupyter,bionty] @ git+https://github.com/laminlabs/lamindb@release",
     )
-    session.run("coverage", "xml")
-    prefix = "." if Path("./lndocs").exists() else ".."
-    session.install(f"{prefix}/lndocs")
-    session.run("lndocs")
+
+
+@nox.session
+def build(session):
+    login_testuser1(session)
+    run_pytest(session, coverage=False)
+    build_docs(session, strip_prefix=True)
+    upload_docs_artifact(aws=True)
