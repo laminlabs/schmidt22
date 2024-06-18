@@ -9,8 +9,10 @@ transform = ln.Transform(
 )
 ln.track(transform=transform)
 # access uploaded files as inputs for the pipeline
-input_artifacts = ln.Artifact.filter(key__startswith="fastq/perturbseq").all()
+input_artifacts = ln.Artifact.filter(key__startswith="fastq/schmidt22_perturbseq").all()
 input_paths = [artifact.cache() for artifact in input_artifacts]
 # register output files
-output_artifacts = ln.Artifact.from_dir("./perturbseq/filtered_feature_bc_matrix/")
+output_artifacts = ln.Artifact.from_dir(
+    "s3://lamindata/schmidt22_perturbseq/filtered_feature_bc_matrix"
+)
 ln.save(output_artifacts)
