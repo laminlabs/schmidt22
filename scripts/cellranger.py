@@ -1,6 +1,5 @@
 import lamindb as ln
 
-
 # register the pipeline and track input/output artifacts
 transform = ln.Transform(
     name="Cell Ranger",
@@ -13,7 +12,5 @@ ln.track(transform=transform)
 input_artifacts = ln.Artifact.filter(key__startswith="fastq/perturbseq").all()
 input_paths = [artifact.cache() for artifact in input_artifacts]
 # register output files
-output_artifacts = ln.Artifact.from_dir(
-    "./lamindata/perturbseq/filtered_feature_bc_matrix/"
-)
+output_artifacts = ln.Artifact.from_dir("./perturbseq/filtered_feature_bc_matrix/")
 ln.save(output_artifacts)

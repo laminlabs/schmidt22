@@ -110,3 +110,5 @@ docs/conf.py
 _docs_tmp*
 *.csv
 *.h5ad
+fastq/
+perturbseq/

@@ -1,5 +1,5 @@
-import lamindb as ln
 import bionty as bt
+import lamindb as ln
 
 # Post-process 3 cellranger output files
 ln.settings.transform.stem_uid = "piG5scNASXcc"
@@ -8,7 +8,7 @@ ln.settings.sync_git_repo = "https://github.com/laminlabs/rnd-demo"
 ln.track()
 
 output_artifacts = ln.Artifact.filter(
-    key__startswith="schmidt22_perturbseq/filtered_feature_bc_matrix"
+    key__startswith="perturbseq/filtered_feature_bc_matrix"
 ).all()
 input_artifacts = [f.cache() for f in output_artifacts]
 output_path = ln.core.datasets.schmidt22_perturbseq(basedir=ln.settings.storage)
