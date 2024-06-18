@@ -1,9 +1,11 @@
 import lamindb as ln
 
+# track the current python script
 ln.settings.transform.stem_uid = "J5ZTmVxSch3U"
 ln.settings.transform.version = "1"
 ln.settings.sync_git_repo = "https://github.com/laminlabs/rnd-demo"
-run = ln.track()
+run = ln.track(params={"project": "schmidt22"})
+# label the transform
 ulabel1 = ln.ULabel(name="use-case").save()
 ulabel2 = ln.ULabel(name="schmidt22").save()
 run.transform.ulabels.add(ulabel1, ulabel2)
