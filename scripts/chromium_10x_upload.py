@@ -12,7 +12,7 @@ ln.context.transform.ulabels.add(ulabel1, ulabel2)
 # label with instrument
 features = ln.Feature.lookup()
 novaseq6000 = bt.ExperimentalFactor.get(name="Illumina NovaSeq 6000")
-efo_10x = bt.ExperimentalFactor.get(name="10X 3' v1")
+efo_10x = bt.ExperimentalFactor.get(name="10x 3' v1")
 exp001 = ln.ULabel.get(name="EXP002")
 s001 = ln.ULabel.get(name="S001")
 
