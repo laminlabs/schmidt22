@@ -1,5 +1,5 @@
-import lamindb as ln
 import bionty as bt
+import lamindb as ln
 
 # track the current python script
 ln.settings.sync_git_repo = "https://github.com/laminlabs/rnd-demo"
