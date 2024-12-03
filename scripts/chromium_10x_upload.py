@@ -11,8 +11,8 @@ ln.context.transform.ulabels.add(ulabel1, ulabel2)
 
 # label with instrument
 features = ln.Feature.lookup()
+perturbseq = bt.ExperimentalFactor.get(name="Perturb-Seq")
 novaseq6000 = bt.ExperimentalFactor.get(name="Illumina NovaSeq 6000")
-efo_10x = bt.ExperimentalFactor.get(name="10x 3' v1")
 exp001 = ln.ULabel.get(name="EXP002")
 s001 = ln.ULabel.get(name="S001")
 
@@ -24,7 +24,7 @@ raw_files = [
 for raw_file in raw_files:
     artifact = ln.Artifact(raw_file).save()
     artifact.labels.add(novaseq6000, feature=features.instrument)
-    artifact.labels.add(efo_10x, feature=features.technology)
+    artifact.labels.add(perturbseq, feature=features.technology)
     artifact.labels.add(exp001, feature=features.experiment)
     artifact.labels.add(s001, feature=features.biosample)
 
