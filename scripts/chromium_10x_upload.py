@@ -1,5 +1,6 @@
 import bionty as bt
 import lamindb as ln
+import wetlab as wl
 
 # track the current python script
 ln.settings.sync_git_repo = "https://github.com/laminlabs/rnd-demo"
@@ -13,8 +14,8 @@ ln.context.transform.ulabels.add(ulabel1, ulabel2)
 features = ln.Feature.lookup()
 perturbseq = bt.ExperimentalFactor.get(name="Perturb-Seq")
 novaseq6000 = bt.ExperimentalFactor.get(name="Illumina NovaSeq 6000")
-exp001 = ln.ULabel.get(name="EXP002")
-s001 = ln.ULabel.get(name="S001")
+exp001 = wl.Experiment.get(name="EXP002")
+s001 = wl.Biosample.get(name="S001")
 
 # register output files of the sequencer
 raw_files = [
