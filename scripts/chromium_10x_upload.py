@@ -4,7 +4,7 @@ import wetlab as wl
 
 # track the current python script
 ln.settings.sync_git_repo = "https://github.com/laminlabs/rnd-demo"
-ln.track("J5ZTmVxSch3U0002", params={"project": "schmidt22"})
+ln.track("J5ZTmVxSch3U0003", params={"project": "schmidt22"})
 # label the transform
 ulabel1 = ln.ULabel.get(name="use-case")
 ulabel2 = ln.ULabel.get(name="schmidt22")
