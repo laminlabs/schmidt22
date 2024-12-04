@@ -2,7 +2,7 @@ import lamindb as ln
 
 # Post-process 3 cellranger output files
 ln.settings.sync_git_repo = "https://github.com/laminlabs/rnd-demo"
-ln.track("piG5scNASXcc5zKv", params={"project": "schmidt22"})
+ln.track("piG5scNASXcc0001", params={"project": "schmidt22"})
 # label the transform
 ulabel1 = ln.ULabel.get(name="use-case")
 ulabel2 = ln.ULabel.get(name="schmidt22")
