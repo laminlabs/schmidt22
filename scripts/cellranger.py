@@ -1,7 +1,7 @@
 import lamindb as ln
 
 # register the pipeline and track input/output artifacts
-transform = ln.Transform.get(name="Cell Ranger", version="9.0.0")
+transform = ln.Transform.filter(name="Cell Ranger", version="9.0.0").one_or_none()
 if transform is None:
     transform = ln.Transform(
         name="Cell Ranger",
