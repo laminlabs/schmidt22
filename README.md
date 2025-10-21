@@ -1,7 +1,3 @@
-# R&D demo: Simulation of R&D data flow
+# Reproducing Schmidt et al. (2022)
 
-This package is in private beta at this moment!
-
-Follow https://twitter.com/laminlabs to learn about a first public release.
-
-For beta users: Read the [docs](https://lamin.ai/docs/rnd-demo).
+See [Schmidt _et al._, Science (2022)](https://www.science.org/doi/10.1126/science.abj4008).
