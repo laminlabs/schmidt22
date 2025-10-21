@@ -2,30 +2,20 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, staging]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_EVENT_NAME: ${{ github.event_name }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-latest
-            python: "3.12"
-          # - os: macOS-latest
-          #   python: "3.12"
     timeout-minutes: 15
-
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python }}
+          python-version: 3.12
       - run: pip install git+https://github.com/laminlabs/laminci
       - run: uv pip install --system git+https://github.com/laminlabs/lamindb
       - run: lamin init
+      - run: python scripts/define_types_and_features.py
