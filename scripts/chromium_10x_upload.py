@@ -1,32 +1,53 @@
-import bionty as bt
+#!/usr/bin/env python3
+"""Register FASTQ files from S3 with metadata annotations.
+
+Example usage:
+    python register_fastq.py \
+        --s3-folder s3://lamindata/fastq \
+        --experiment EXP002 \
+        --biosample S001 \
+        --project Schmidt22
+"""
+
+import argparse
 import lamindb as ln
-import wetlab as wl
 
-# track the current python script
-ln.settings.sync_git_repo = "https://github.com/laminlabs/rnd-demo"
-ln.track("J5ZTmVxSch3U0003", params={"project": "schmidt22"})
-# label the transform
-ulabel1 = ln.ULabel.get(name="use-case")
-ulabel2 = ln.ULabel.get(name="schmidt22")
-ln.context.transform.ulabels.add(ulabel1, ulabel2)
 
-# label with instrument
-features = ln.Feature.lookup()
-perturbseq = bt.ExperimentalFactor.get(name="Perturb-Seq")
-novaseq6000 = bt.ExperimentalFactor.get(name="Illumina NovaSeq 6000")
-exp001 = wl.Experiment.get(name="EXP002")
-s001 = wl.Biosample.get(name="S001")
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--s3-folder", required=True)
+    parser.add_argument("--experiment", required=True)
+    parser.add_argument("--biosample", required=True)
+    parser.add_argument("--project", required=True)
+    return parser.parse_args()
 
-# register output files of the sequencer
-raw_files = [
-    "s3://lamindata/fastq/schmidt22_perturbseq_R1_001.fastq.gz",
-    "s3://lamindata/fastq/schmidt22_perturbseq_R2_001.fastq.gz",
-]
-for raw_file in raw_files:
-    artifact = ln.Artifact(raw_file).save()
-    artifact.labels.add(novaseq6000, feature=features.instrument)
-    artifact.labels.add(perturbseq, feature=features.technology)
-    artifact.labels.add(exp001, feature=features.experiment)
-    artifact.labels.add(s001, feature=features.biosample)
 
-ln.finish()
+def main():
+    args = parse_args()
+    ln.track(
+        "J5ZTmVxSch3U",
+        project=args.project,
+        features={
+            "s3_folder": args.s3_folder,
+            "experiment": args.experiment,
+            "biosample": args.biosample,
+        },
+    )
+    raw_files = list(ln.UPath(args.s3_folder, anon=True).glob("*.fastq.gz"))
+    for raw_file in raw_files:
+        ln.Artifact(
+            raw_file,
+            features={
+                "instrument": "Illumina NovaSeq 6000",
+                "technology": "Perturb-Seq",
+                "library_preparation": "10x 3' v2",
+                "experiment": args.experiment,
+                "biosample": args.biosample,
+            },
+        ).save()
+    print(f"registered {len(raw_files)} artifacts")
+    ln.finish()
+
+
+if __name__ == "__main__":
+    main()
