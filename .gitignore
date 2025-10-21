@@ -1,4 +1,4 @@
-docs/mycrispr/
+*.ipynb
 
 # macOS
 .DS_Store
