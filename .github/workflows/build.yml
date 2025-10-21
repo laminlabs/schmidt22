@@ -17,5 +17,5 @@ jobs:
           python-version: 3.12
       - run: pip install git+https://github.com/laminlabs/laminci
       - run: uv pip install --system git+https://github.com/laminlabs/lamindb
-      - run: lamin init
+      - run: lamin init --storage ./test-schmid22 --modules bionty
       - run: python scripts/define_types_and_features.py
