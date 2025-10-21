@@ -14,23 +14,11 @@ import lamindb as ln
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description="Register FASTQ files from S3 with metadata annotations"
-    )
-    parser.add_argument(
-        "--s3-folder",
-        required=True,
-        help="S3 folder containing FASTQ files (e.g., s3://lamindata/fastq/)",
-    )
-    parser.add_argument(
-        "--experiment", required=True, help="Experiment identifier (e.g., EXP002)"
-    )
-    parser.add_argument(
-        "--biosample", required=True, help="Biosample identifier (e.g., S001)"
-    )
-    parser.add_argument(
-        "--project", default="Schmidt22", help="Project name (default: Schmidt22)"
-    )
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--s3-folder", required=True)
+    parser.add_argument("--experiment", required=True)
+    parser.add_argument("--biosample", required=True)
+    parser.add_argument("--project", required=True)
     return parser.parse_args()
 
 
