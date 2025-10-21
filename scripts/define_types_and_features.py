@@ -15,6 +15,7 @@ def main():
     ln.Feature(name="experiment", dtype=experiment_type).save()
     ln.Feature(name="assays_efo", dtype=list[bt.ExperimentalFactor]).save()
     ln.Feature(name="readouts_efo", dtype=list[bt.ExperimentalFactor]).save()
+    ln.Feature(name="s3_folder", dtype=str).save()
     # finish this script
     ln.finish()
 

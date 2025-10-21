@@ -29,8 +29,8 @@ def main():
         project=args.project,
         features={
             "s3_folder": args.s3_folder,
-            "experiment_record": args.experiment,
-            "biosample_record": args.biosample,
+            "experiment": args.experiment,
+            "biosample": args.biosample,
         },
     )
     raw_files = list(ln.UPath(args.s3_folder).glob("*.fastq.gz"))
@@ -41,8 +41,8 @@ def main():
                 "instrument": "Illumina NovaSeq 6000",
                 "technology": "Perturb-Seq",
                 "library_preparation": "10x 3' v2",
-                "experiment_record": args.experiment,
-                "biosample_record": args.biosample,
+                "experiment": args.experiment,
+                "biosample": args.biosample,
             },
         ).save()
     print(f"registered {len(raw_files)} artifacts")
