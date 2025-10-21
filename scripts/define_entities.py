@@ -13,10 +13,12 @@ def main():
     ).save()
 
     ln.Feature(
-        name="biosample", dtype=biosample_type, description="Biosample record"
+        name="biosample",
+        dtype=biosample_type,
     ).save()
     ln.Feature(
-        name="experiment", dtype=experiment_type, description="Experiment record"
+        name="experiment",
+        dtype=experiment_type,
     ).save()
     ln.Feature(
         name="assays_efo",
