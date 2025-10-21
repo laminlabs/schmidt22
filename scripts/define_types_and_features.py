@@ -19,6 +19,7 @@ def main():
     # create labels for samples and experiments
     ln.Record(name="Schmidt22 S001", type=biosample_type).save()
     ln.Record(name="Schmidt22 EXP001", type=experiment_type).save()
+    ln.Record(name="Schmidt22 EXP002", type=experiment_type).save()
     # finish the script
     ln.finish()
 
