@@ -16,10 +16,17 @@ def main():
     ln.Feature(name="assays_efo", dtype=list[bt.ExperimentalFactor]).save()
     ln.Feature(name="readouts_efo", dtype=list[bt.ExperimentalFactor]).save()
     ln.Feature(name="s3_folder", dtype=str).save()
+    ln.Feature(name="library_preparation", dtype=bt.ExperimentalFactor).save()
+    ln.Feature(name="technology", dtype=bt.ExperimentalFactor).save()
+    ln.Feature(name="instrument", dtype=bt.ExperimentalFactor).save()
     # create labels for samples and experiments
     ln.Record(name="Schmidt22 S001", type=biosample_type).save()
     ln.Record(name="Schmidt22 EXP001", type=experiment_type).save()
     ln.Record(name="Schmidt22 EXP002", type=experiment_type).save()
+    # create labels for instrument, technology, library preparation
+    ln.ExperimentalFactor.from_source(name="Illumina NovaSeq 6000").save()
+    ln.ExperimentalFactor.from_source(name="Perturb-Seq").save()
+    ln.ExperimentalFactor.from_source(name="10x 3' v2").save()
     # finish the script
     ln.finish()
 

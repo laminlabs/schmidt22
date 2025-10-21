@@ -33,8 +33,7 @@ def main():
             "biosample": args.biosample,
         },
     )
-    upath = ln.setup.core.upath.create_path(args.s3_folder)
-    raw_files = list(upath.glob("*.fastq.gz"))
+    raw_files = list(ln.UPath(args.s3_folder, anon=True).glob("*.fastq.gz"))
     for raw_file in raw_files:
         ln.Artifact(
             raw_file,
