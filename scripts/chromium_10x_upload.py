@@ -3,7 +3,7 @@
 
 Example usage:
     python register_fastq.py \
-        --s3-folder s3://lamindata/fastq/ \
+        --s3-folder s3://lamindata/fastq \
         --experiment EXP002 \
         --biosample S001 \
         --project Schmidt22
