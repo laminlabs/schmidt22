@@ -18,8 +18,8 @@ jobs:
       - run: lamin init --storage ./test-schmid22 --modules bionty
       - run: python scripts/define_types_features_labels.py
       # process the GWS CRISPR IFNg readout data
-      - run: jupyter nbconvert --to notebook --execute notebooks/curate_gws_crispr_ifng_readout.ipynb
-      - run: jupyter nbconvert --to notebook --execute notebooks/analyze_gws_crispr_ifng_readout.ipynb
+      - run: jupyter nbconvert --to notebook --inplace --execute notebooks/curate_gws_crispr_ifng_readout.ipynb
+      - run: jupyter nbconvert --to notebook --inplace --execute notebooks/analyze_gws_crispr_ifng_readout.ipynb
       # process the 10x Chromium upload data
       - run: python scripts/register_chromium_10x_upload.py --s3-folder s3://lamindata/fastq --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22
       - run: python scripts/run_cellranger_count.py --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22 --dry-run
