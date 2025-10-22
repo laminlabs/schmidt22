@@ -3,8 +3,8 @@
 
 Example usage:
     python run_cellranger.py \
-        --experiment "Schmidt22 EXP002" \
-        --biosample "Schmidt22 S001" \
+        --experiment "Schmidt22-EXP002" \
+        --biosample "Schmidt22-S001" \
         --project Schmidt22 \
         --dry-run
 """
@@ -43,9 +43,7 @@ def main():
             "biosample": args.biosample,
         },
     )
-    identifier = (
-        f"{args.experiment.replace(' ', '_')}_{args.biosample.replace(' ', '_')}"
-    )
+    identifier = f"{args.experiment}_{args.biosample}"
 
     # Get input files
     input_artifacts = (

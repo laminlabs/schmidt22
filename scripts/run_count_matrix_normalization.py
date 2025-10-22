@@ -3,15 +3,14 @@
 
 Example usage:
     python post_process_cellranger.py \
-        --experiment "Schmidt22 EXP002" \
-        --biosample "Schmidt22 S001" \
+        --experiment "Schmidt22-EXP002" \
+        --biosample "Schmidt22-S001" \
         --project Schmidt22 \
         --dry-run
 """
 
 import argparse
 import lamindb as ln
-import scanpy as sc
 from pathlib import Path
 
 
@@ -40,9 +39,7 @@ def main():
         },
     )
 
-    identifier = (
-        f"{args.experiment.replace(' ', '_')}_{args.biosample.replace(' ', '_')}"
-    )
+    identifier = f"{args.experiment}_{args.biosample}"
 
     # get inputs
     matrix_artifact = (
@@ -52,6 +49,8 @@ def main():
     )
 
     if not args.dry_run:
+        import scanpy as sc
+
         adata = sc.read_10x_h5(
             matrix_artifact.cache() / "filtered_feature_bc_matrix.h5"
         )
