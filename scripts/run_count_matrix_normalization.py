@@ -48,7 +48,7 @@ def main():
     matrix_artifact = (
         ln.Artifact.filter(key__endswith="filtered_feature_bc_matrix", suffix=".h5")
         .filter(experiment=args.experiment, biosample=args.biosample)
-        .one()
+        .one()  # exactly one result
     )
 
     if not args.dry_run:
