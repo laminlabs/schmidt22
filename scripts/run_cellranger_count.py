@@ -22,7 +22,6 @@ def parse_args():
     parser.add_argument(
         "--transcriptome",
         default="https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2020-A.tar.gz",
-        required=True,
     )
     parser.add_argument("--project", required=True)
     parser.add_argument(
