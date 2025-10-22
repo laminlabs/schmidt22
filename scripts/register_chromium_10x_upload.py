@@ -4,8 +4,8 @@
 Example usage:
     python register_fastq.py \
         --s3-folder s3://lamindata/fastq \
-        --experiment "Schmidt22 EXP002" \
-        --biosample "Schmidt22 S001" \
+        --experiment Schmidt22-EXP002 \
+        --biosample Schmidt22-S001 \
         --project Schmidt22
 """
 
