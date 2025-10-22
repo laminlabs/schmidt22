@@ -25,9 +25,15 @@ def main():
     ln.Record(name="Schmidt22-EXP001", type=experiment_type).save()
     ln.Record(name="Schmidt22-EXP002", type=experiment_type).save()
     # create labels for instrument, technology, library preparation
-    bt.ExperimentalFactor.from_source(name="Illumina NovaSeq 6000").save()
-    bt.ExperimentalFactor.from_source(name="Perturb-Seq").save()
-    bt.ExperimentalFactor.from_source(name="10x 3' v2").save()
+    bt.ExperimentalFactor.from_values(
+        [
+            "Illumina NovaSeq 6000",
+            "Perturb-Seq",
+            "gRNA-seq",
+            "10x 3' v2",
+            "interferon gamma",
+        ]
+    ).save()
     # create the reference
     ln.Reference(
         abbr="Schmidt22",
