@@ -36,7 +36,6 @@ def main():
     args = parse_args()
 
     ln.track(
-        "CellRangerPipelineV1",
         project=args.project,
         features={
             "transcriptome": args.transcriptome,
