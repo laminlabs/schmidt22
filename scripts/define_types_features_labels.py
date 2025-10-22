@@ -21,7 +21,7 @@ def main():
     ln.Feature(name="instrument", dtype=bt.ExperimentalFactor).save()
     # create labels for samples and experiments
     ln.Record(name="Schmidt22-S001", type=biosample_type).save()
-    ln.Record(name="Schmidt22 EXP001", type=experiment_type).save()
+    ln.Record(name="Schmidt22-EXP001", type=experiment_type).save()
     ln.Record(name="Schmidt22-EXP002", type=experiment_type).save()
     # create labels for instrument, technology, library preparation
     bt.ExperimentalFactor.from_source(name="Illumina NovaSeq 6000").save()
