@@ -10,13 +10,12 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.12
+          python-version: 3.13
       - run: pip install git+https://github.com/laminlabs/laminci
       - run: uv pip install --system git+https://github.com/laminlabs/lamindb
       - run: lamin init --storage ./test-schmid22 --modules bionty
-      - run: python scripts/define_types_and_features.py
-      - run: python scripts/chromium_10x_upload.py --s3-folder s3://lamindata/fastq --experiment "Schmidt22 EXP002" --biosample "Schmidt22 S001" --project Schmidt22
+      - run: python scripts/define_types_features_labels.py
+      - run: python scripts/register_chromium_10x_upload.py --s3-folder s3://lamindata/fastq --experiment "Schmidt22 EXP002" --biosample "Schmidt22 S001" --project Schmidt22
+      - run: python scripts/run_cellranger_count.py --experiment "Schmidt22 EXP002" --biosample "Schmidt22 S001" --project Schmidt22 --dry-run
