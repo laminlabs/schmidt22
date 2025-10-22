@@ -3,8 +3,8 @@
 
 Example usage:
     python post_process_cellranger.py \
-        --experiment "Schmidt22-EXP002" \
-        --biosample "Schmidt22-S001" \
+        --experiment Schmidt22-EXP002 \
+        --biosample Schmidt22-S001 \
         --project Schmidt22 \
         --dry-run
 """
