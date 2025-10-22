@@ -43,7 +43,7 @@ def main():
 
     # get inputs
     matrix_artifact = (
-        ln.Artifact.filter(key__endswith="filtered_feature_bc_matrix", suffix=".h5")
+        ln.Artifact.filter(key__endswith="filtered_feature_bc_matrix.h5")
         .filter(experiment=args.experiment, biosample=args.biosample)
         .one()  # exactly one result
     )
