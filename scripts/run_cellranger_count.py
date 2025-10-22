@@ -38,7 +38,7 @@ def main():
     ln.track(
         project=args.project,
         features={
-            "transcriptome": args.transcriptome,
+            "transcriptome_link": args.transcriptome,
             "experiment": args.experiment,
             "biosample": args.biosample,
         },

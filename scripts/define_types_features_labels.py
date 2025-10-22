@@ -28,8 +28,7 @@ def main():
     bt.ExperimentalFactor.from_source(name="Perturb-Seq").save()
     bt.ExperimentalFactor.from_source(name="10x 3' v2").save()
     # create features for cell ranger run
-    ln.Feature(name="fastq_prefix", dtype=str).save()
-
+    ln.Feature(name="transcriptome_link", dtype=str).save()
     # finish the script
     ln.finish()
 
