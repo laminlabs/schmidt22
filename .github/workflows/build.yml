@@ -13,10 +13,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.13
-      - run: pip install git+https://github.com/laminlabs/laminci
-      - run: uv pip install --system git+https://github.com/laminlabs/lamindb
+      - run: pip install uv
+      - run: uv pip install --system git+https://github.com/laminlabs/lamindb ipykernel
       - run: lamin init --storage ./test-schmid22 --modules bionty
+      # define types, features, and labels
       - run: python scripts/define_types_features_labels.py
-      - run: python scripts/register_chromium_10x_upload.py --s3-folder s3://lamindata/fastq --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22
+      # process the GWS CRISPR IFNg readout data
+      - run: jupyter nbconvert --to notebook --inplace --execute notebooks/curate_gws_crispr_ifng_readout.ipynb
+      - run: jupyter nbconvert --to notebook --inplace --execute notebooks/analyze_gws_crispr_ifng_readout.ipynb
+      # process the 10x Chromium upload data
+      - run: python scripts/curate_chromium_10x_upload.py --s3-folder s3://lamindata/fastq --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22
       - run: python scripts/run_cellranger_count.py --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22 --dry-run
       - run: python scripts/run_count_matrix_normalization.py --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22 --dry-run
