@@ -45,7 +45,7 @@ def main():
     )
     identifier = f"{args.experiment}_{args.biosample}"
 
-    # Get input files
+    # get input files
     input_artifacts = (
         ln.Artifact.filter(suffix=".fastq.gz")
         .filter(experiment=args.experiment, biosample=args.biosample)
@@ -86,7 +86,7 @@ def main():
         path = output_dir / "outs" / output
     ln.Artifact(
         path,
-        key=f"cell_ranger/{identifier}/count/{output}",
+        key=f"schmidt22/cell_ranger/{identifier}/count/{output}",
         features={
             "experiment": args.experiment,
             "biosample": args.biosample,

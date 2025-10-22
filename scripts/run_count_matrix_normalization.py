@@ -38,22 +38,20 @@ def main():
             "biosample": args.biosample,
         },
     )
-
     identifier = f"{args.experiment}_{args.biosample}"
 
-    # get inputs
-    matrix_artifact = (
+    # get input
+    matrix_path = (
         ln.Artifact.filter(key__endswith="filtered_feature_bc_matrix.h5")
         .filter(experiment=args.experiment, biosample=args.biosample)
         .one()  # exactly one result
+        .cache()
     )
 
     if not args.dry_run:
         import scanpy as sc
 
-        adata = sc.read_10x_h5(
-            matrix_artifact.cache() / "filtered_feature_bc_matrix.h5"
-        )
+        adata = sc.read_10x_h5(matrix_path / "filtered_feature_bc_matrix.h5")
         sc.pp.normalize_total(adata, target_sum=1e4)
         sc.pp.log1p(adata)
         output_path = Path(f"./processed_{identifier}.h5ad")
@@ -64,8 +62,7 @@ def main():
     # register/upload outputs
     ln.Artifact(
         output_path,
-        key="schmidt22_perturbseq/schmidt22_perturbseq.h5ad",
-        description=f"Processed counts for {args.experiment} {args.biosample}",
+        key=f"schmidt22/processed/{identifier}/normalized.h5ad",
         features={
             "experiment": args.experiment,
             "biosample": args.biosample,
