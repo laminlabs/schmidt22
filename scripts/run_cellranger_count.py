@@ -54,7 +54,7 @@ def main():
         .all()
     )
     assert input_artifacts, f"no FASTQ files found with prefix '{args.fastq_prefix}'"
-    print(f"found {len(input_artifacts)} FASTQ files")
+    print(f"inputs: {len(input_artifacts)} FASTQ files")
 
     fastq_dir = Path(f"./fastq_input_{identifier}")
     fastq_dir.mkdir(exist_ok=True)
