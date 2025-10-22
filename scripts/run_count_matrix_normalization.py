@@ -60,7 +60,7 @@ def main():
         output_path = "s3://lamindata/schmidt22_perturbseq/schmidt22_perturbseq.h5ad"
 
     # register/upload outputs
-    ln.Artifact(
+    ln.Artifact.from_anndata(
         output_path,
         key=f"schmidt22/processed/{identifier}/normalized.h5ad",
         features={
