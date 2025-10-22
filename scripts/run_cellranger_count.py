@@ -81,23 +81,20 @@ def main():
         sp.run(cmd, check=True)
 
     # register/upload outputs
-    outputs = [
-        "filtered_feature_bc_matrix",
-        "web_summary.html",
-        "metrics_summary.csv",
-        "molecule_info.h5",
-    ]
-    if not args.dry_run:
-        for output in outputs:
-            path = output_dir / "outs" / output
-            if not path.exists():
-                continue
-            ln.Artifact(path, key=f"cell_ranger/{identifier}/count/{output}").save()
-            print(f"✓ registered: {output}")
+    output = "filtered_feature_bc_matrix.h5"
+    if args.dry_run:
+        path = f"s3://lamindata/schmidt22_perturbseq/count/{output}"
     else:
-        ln.Artifact(
-            "s3://lamindata/schmidt22_perturbseq/filtered_feature_bc_matrix"
-        ).save()
+        path = output_dir / "outs" / output
+    ln.Artifact(
+        path,
+        key=f"cell_ranger/{identifier}/count/{output}",
+        features={
+            "experiment": args.experiment,
+            "biosample": args.biosample,
+        },
+    ).save()
+    print(f"✓ registered: {output}")
 
     ln.finish()
 
