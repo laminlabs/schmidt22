@@ -57,7 +57,7 @@ def main():
         output_path = Path(f"./processed_{identifier}.h5ad")
         adata.write(output_path)
     else:
-        output_path = "s3://lamindata/schmidt22_perturbseq/schmidt22_perturbseq.h5ad"
+        output_path = "s3://lamindata/schmidt22_perturbseq/schmidt22_perturbseq_ensembl_gene_ids.h5ad"
 
     # register/upload outputs
     ln.Artifact.from_anndata(
@@ -67,6 +67,7 @@ def main():
             "experiment": args.experiment,
             "biosample": args.biosample,
         },
+        schema="ensembl_gene_ids_and_valid_features_in_obs",
     ).save()
 
     print(f"✓ registered: {output_path}")

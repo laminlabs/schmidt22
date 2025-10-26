@@ -45,6 +45,84 @@ def main():
     ln.Feature(name="transcriptome_link", dtype=str).save()
     # we need the gene ontology
     bt.Gene.import_source()
+    # features for curating the screen results
+    schmidt22_features = ln.Feature(
+        name="Schmidt22",
+        is_type=True,
+        description="Features from Schmidt et al. 2022, Genome-wide CRISPRa screen with IFN-gamma readout in melanoma cells",
+    ).save()
+    target_gene_symbol = ln.Feature(
+        name="target_gene_symbol",
+        dtype=bt.Gene.symbol,
+        type=schmidt22_features,
+        description="Target gene of CRISPRa experiment",
+    ).save()
+    target_gene_ensembl_id = ln.Feature(
+        name="target_gene_ensembl_id",
+        dtype=bt.Gene.ensembl_gene_id,
+        type=schmidt22_features,
+        description="Target gene of CRISPRa experiment",
+    ).save()
+    crispr_ifng_p_value_neg = ln.Feature(
+        name="crispr_ifng_p_value_neg",
+        dtype=float,
+        type=schmidt22_features,
+        description="Negative CRISPR IFN-gamma p-value",
+    ).save()
+    crispr_ifng_p_value_pos = ln.Feature(
+        name="crispr_ifng_p_value_pos",
+        dtype=float,
+        type=schmidt22_features,
+        description="Positive CRISPR IFN-gamma p-value",
+    ).save()
+    # define schema for the screen results
+    schmidt22_schemas = ln.Schema(
+        name="Schmidt22",
+        is_type=True,
+        description="Schemas from Schmidt et al. 2022, Genome-wide CRISPRa screen with IFN-gamma readout in melanoma cells",
+    ).save()
+    schema = ln.Schema(
+        name="GWS_CRISPRa_IFN-gamma_readout",
+        features=[
+            target_gene_symbol,
+            target_gene_ensembl_id,
+            crispr_ifng_p_value_neg,
+            crispr_ifng_p_value_pos,
+        ],
+        type=schmidt22_schemas,
+        description="Genome-wide CRISPRa screen with IFN-gamma readout in melanoma cells",
+    ).save()
+    schema.describe()
+    # define feature for the scRNA analysis
+    schmidt22_type = ln.Record(name="Schmidt22", is_type=True).save()
+    cell_state_type = ln.Record(
+        name="CellState", is_type=True, type=schmidt22_type
+    ).save()
+    for cell_state in [
+        "IFNG High 1",
+        "Negative Regulators",
+        "Th2",
+        "IL22 High",
+        "Proliferative (S)",
+        "Proliferative (G2/M)",
+        "TNF Locus High",
+        "GNLY High",
+        "CCL3/4 High, IFNG Low",
+        "CD8 Common",
+        "EMP1 Guides",
+        "IFNG High 2",
+        "IL2 High 1",
+        "CD4 Common",
+        "IL2 High 2",
+    ]:
+        ln.Record(name=cell_state, type=cell_state_type).save()
+    ln.Feature(
+        name="scrna_cell_state", dtype=cell_state_type, type=schmidt22_features
+    ).save()
+    # target metric of joint scRNA & screen analysis
+    ln.Feature(
+        name="enrichment_score_for_screen_results", dtype=float, type=schmidt22_features
+    ).save()
     # finish the script
     ln.finish()
 
