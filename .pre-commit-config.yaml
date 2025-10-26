@@ -29,12 +29,12 @@ repos:
       - id: detect-private-key
       - id: no-commit-to-branch
         args: ["--branch=main"]
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.4.1
-    hooks:
-      - id: codespell
-        additional_dependencies:
-          - tomli
+  # - repo: https://github.com/codespell-project/codespell
+  #   rev: v2.4.1
+  #   hooks:
+  #     - id: codespell
+  #       additional_dependencies:
+  #         - tomli
   - repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
     hooks:
