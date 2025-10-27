@@ -25,3 +25,5 @@ jobs:
       - run: python scripts/curate_chromium_10x_upload.py --s3-folder s3://lamindata/fastq --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22
       - run: python scripts/run_cellranger_count.py --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22 --dry-run
       - run: python scripts/run_scrna_normalization_clustering.py --experiment Schmidt22-EXP002 --biosample Schmidt22-S001 --project Schmidt22 --dry-run
+      # run the joint analysis
+      - run: jupyter nbconvert --to notebook --inplace --execute notebooks/analyze_scrna_joined_on_ifng_readout.ipynb
