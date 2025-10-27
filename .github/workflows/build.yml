@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: 3.13
       - run: pip install uv
-      - run: uv pip install --system git+https://github.com/laminlabs/lamindb ipykernel
+      - run: uv pip install --system git+https://github.com/laminlabs/lamindb ipykernel scanpy
       - run: lamin init --storage ./test-schmid22 --modules bionty
       # define types, features, and labels
       - run: python scripts/define_types_features_labels.py
