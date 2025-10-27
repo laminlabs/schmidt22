@@ -56,13 +56,15 @@ def main():
         sc.pp.log1p(adata)
         output_path = Path(f"./processed_{identifier}.h5ad")
         adata.write(output_path)
+        key = f"schmidt22/processed/{identifier}/normalized.h5ad"
     else:
         output_path = "s3://lamindata/schmidt22_perturbseq/schmidt22_perturbseq_ensembl_gene_ids.h5ad"
+        key = "schmidt22_perturbseq/schmidt22_perturbseq_ensembl_gene_ids.h5ad"
 
     # register/upload outputs
     ln.Artifact.from_anndata(
         output_path,
-        key=f"schmidt22/processed/{identifier}/normalized.h5ad",
+        key=key,
         features={
             "experiment": args.experiment,
             "biosample": args.biosample,
