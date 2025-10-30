@@ -3,6 +3,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  repository_dispatch:
+    types: [build]
 
 jobs:
   build:
@@ -27,3 +29,21 @@ jobs:
       - run: jupyter nbconvert --to notebook --inplace --execute notebooks/analyze_gws_crispr_ifng_readout.ipynb
       # analyze the joint data in a notebook
       - run: jupyter nbconvert --to notebook --inplace --execute notebooks/analyze_scrna_joined_on_ifng_readout.ipynb
+
+  notify:
+      - uses: zuplo/github-action-slack-notify-build@v2
+        if: ${{ success() && github.event_name == 'repository_dispatch' }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_GITHUB_ACTION }}
+        with:
+          channel_id: C05FDBBFJ1F
+          status: SUCCESS
+          color: good
+      - uses: zuplo/github-action-slack-notify-build@v2
+        if: ${{ failure() && github.event_name == 'repository_dispatch' }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_GITHUB_ACTION }}
+        with:
+          channel_id: C05FDBBFJ1F
+          status: FAILURE
+          color: danger
