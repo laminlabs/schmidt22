@@ -44,7 +44,7 @@ def main():
     # create features for cell ranger run
     ln.Feature(name="transcriptome_link", dtype=str).save()
     # we need the gene ontology
-    bt.Gene.import_source()
+    bt.Gene.import_source(organism="human")
     # features for curating the screen results
     schmidt22_features = ln.Feature(
         name="Schmidt22",
